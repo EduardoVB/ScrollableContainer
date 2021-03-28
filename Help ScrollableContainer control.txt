@@ -1,0 +1,112 @@
+Introduction:
+
+The ScrollableContainer is a container that can have a virtual space larger than the actual physical space.
+It can hold controls in a space bigger than its actual height and width.
+To add controls at design time, drag the controls inside it as it is done with any other container.
+The properties VirtualHeight and VirtualWidth determine the size of the virtual space at design time, and the properties VScrollValue and HScrollValue the scroll position.
+Alternatively, you can right click on the control and select "Edit", and the scroll bars will become active at design time. Every time that you add a new control you'll have to select "Edit" again.
+
+
+Reference:
+
+Properties:
+Note: the extender's properties are not included here (Top, Left, Visible, Etc.)
+
+Notation:
+D: available at design time
+R: read only property
+
+AddingControls:		--
+AutoScrollOnFocus:		D-
+BackColor:		D-
+BorderColor:		D-
+BorderStyle:		D-
+BottomFreeSpace:		D-
+HScrollBar:		D-
+HScrollMax:		-R
+HScrollValue:		D-
+hWnd:			-R
+RightFreeSpace:		D-
+VirtualHeight:		D(not persistable)-
+VirtualWidth:		D(not persistable)-
+VScrollBar:		D-
+VScrollMax:		-R
+VScrollValue:		D-
+TopScrollBound		D-
+
+Description:
+
+AddingControls:
+Use this property when you need to add controls to this container at run time. It is to indicate to the ScrollableContainer that you are adding controls, so that the position that you set to the newly added controls (Left and Top) are set correctly in the virtual space of the container.
+Example use:
+
+    ScrollableContainer1.AddingControls = True
+
+    ' Adding a command button
+    Set NewCmd1 = Me.Controls.Add("VB.CommandButton", "NewCommand1")
+    Set NewCmd1.Container = ScrollableContainer1
+    NewCmd1.Move 1000, 1000
+    NewCmd1.Caption = "New command 1"
+    NewCmd1.Visible = True
+
+    ' Adding another command button
+    Set NewCmd2 = Me.Controls.Add("VB.CommandButton", "NewCommand2")
+    Set NewCmd2.Container = ScrollableContainer1
+    NewCmd2.Move 1600, 1000
+    NewCmd2.Caption = "New command 2"
+    NewCmd2.Visible = True
+
+    ScrollableContainer1.AddingControls = False
+
+
+AutoScrollOnFocus:
+Returns or sets a value that determines if when a contained control gets the focus, if the ScrollableContainer will automatically scroll to show the control in case that it is out of the view.
+A control that is out of view can get the focus because the user is navigating with the Tab key, or pressed an accelerator that is set on the control, or there is a SetFocus to that control in the code.
+
+BackColor:
+Returns or sets the background color.
+
+BorderColor:
+Returns or sets the color of the border when BorderStyle is set to efnFlat1Pix or efnFlat2Pix.
+
+BorderStyle:
+Returns or sets a value that determines how the border of the control looks like.
+
+BottomFreeSpace, RightFreeSpace:
+Returns or sets a value that determines, in scale mode units of the ScrollableContainer's container, the free space that will be left at the bottom or the right of the virtual space (when there is no other control to scroll for).
+
+HScrollBar, VScrollBar:
+Returns or sets a value that determines the horizontal or vertical scrollbar visibility at run time.
+
+HScrollMax, VScrollMax:
+Returns a value, in scale mode units of the ScrollableContainer's container, that indicates the maximum value that HScrollValue / VScrollValue can take, corresponding to the scroll bar position's when the scroll box is in its bottom or rightmost position. 
+
+HScrollValue, VScrollValue:
+Returns or sets a value, in scale mode units of the ScrollableContainer's container, that indicates the scroll actual position.
+It can be set at design time to change the scroll position, but the design time value is not saved and at run time it starts with 0 (zero).
+
+hWnd:
+Returns the Windows handle of the control.
+
+VirtualHeight, VirtualWidth:
+Returns or sets a value that determines, in scale mode units of the ScrollableContainer's container, the height / width of the virtual space where the controls are located.
+It can be set at design time to change the virtual space height, but the design time value is not saved and the run time value is calculated automatically.
+
+TopScrollBound:
+Returns or sets a value, in scale mode units of the ScrollableContainer's container, that sets a limit for the Vertical Scroll that the user can set.
+
+
+Events:
+
+HScrollChange, VScrollChange:
+Generated when HScrollValue and VScrollValue change.
+
+
+Methods:
+
+EnsureControlVisible:
+Ensures that the control referenced in the nControl parameter is visible on the container. If it is not, the ScrollableContainer is automatically scrolled in any needed direction to show the control.
+Example use: ScrollableContainer1.EnsureControlVisible Text10
+
+Update:
+Updates the virtual space dimensions. Usually not neccesary to call it because it is done automatically.

@@ -632,7 +632,8 @@ Public Function SubclassProc(ByVal hWnd As Long, ByVal wMsg As Long, ByVal wPara
     Dim zDelta As Long
     Dim lDelta As Long
     Dim wMKeyFlags As Long
-
+    Const MK_SHIFT As Long = &H4&
+    
     Select Case wMsg
     Case WM_MOUSEWHEEL
         ' Low-word of wParam indicates whether virtual keys
@@ -648,7 +649,11 @@ Public Function SubclassProc(ByVal hWnd As Long, ByVal wMsg As Long, ByVal wPara
             zDelta = -((wParam And &H7FFF0000) \ &H10000)
         End If
         lDelta = (zDelta \ WHEEL_DELTA) * SmallChange(efnSBIVertical) * m_lWheelScrollLines
-        eBar = efnSBIVertical
+        If (wParam And MK_SHIFT) = MK_SHIFT Then
+            eBar = efnSBIHorizontal
+        Else
+            eBar = efnSBIVertical
+        End If
         RaiseEvent MouseWheel(eBar, lDelta)
         If Not (lDelta = 0) Then
             Value(eBar) = Value(eBar) + lDelta

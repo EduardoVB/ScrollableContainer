@@ -1,0 +1,1 @@
+RegSvr32.exe "%~dp0ScllCnt1.ocx" /u

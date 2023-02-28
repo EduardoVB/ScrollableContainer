@@ -518,7 +518,7 @@ Private Sub Class_Terminate()
     pClearUp
 End Sub
 
-Private Function pRaiseEvent(ByVal eBar As efnScrollBarsIdentificationConstants, ByVal bScroll As Boolean)
+Private Sub pRaiseEvent(ByVal eBar As efnScrollBarsIdentificationConstants, ByVal bScroll As Boolean)
     Static s_lLastValue(0 To 1) As Long
     
     If (Value(eBar) <> s_lLastValue(eBar)) Then
@@ -529,7 +529,7 @@ Private Function pRaiseEvent(ByVal eBar As efnScrollBarsIdentificationConstants,
         End If
         s_lLastValue(eBar) = Value(eBar)
     End If
-End Function
+End Sub
 
 Private Function IBSSubclass_MsgResponse(ByVal hWnd As Long, ByVal iMsg As Long) As Long
     IBSSubclass_MsgResponse = emrPostProcess

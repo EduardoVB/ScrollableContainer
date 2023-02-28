@@ -908,20 +908,20 @@ Private Function ContainerScaleMode() As ScaleModeConstants
     ContainerScaleMode = UserControl.Extender.Container.ScaleMode
 End Function
 
-Private Function FromContainerSizeY(nValue, Optional nToScale As ScaleModeConstants = vbTwips) As Single
+Private Function FromContainerSizeY(nValue As Variant, Optional nToScale As ScaleModeConstants = vbTwips) As Single
     FromContainerSizeY = UserControl.ScaleY(nValue, ContainerScaleMode, nToScale)
 End Function
 
-Private Function ToContainerSizeY(nValue, Optional nFromScale As ScaleModeConstants = vbTwips) As Single
+Private Function ToContainerSizeY(nValue As Variant, Optional nFromScale As ScaleModeConstants = vbTwips) As Single
     ToContainerSizeY = UserControl.ScaleY(nValue, nFromScale, ContainerScaleMode)
 End Function
 
 
-Private Function FromContainerSizeX(nValue, Optional nToScale As ScaleModeConstants = vbTwips) As Single
+Private Function FromContainerSizeX(nValue As Variant, Optional nToScale As ScaleModeConstants = vbTwips) As Single
     FromContainerSizeX = UserControl.ScaleX(nValue, ContainerScaleMode, nToScale)
 End Function
 
-Private Function ToContainerSizeX(nValue, Optional nFromScale As ScaleModeConstants = vbTwips) As Single
+Private Function ToContainerSizeX(nValue As Variant, Optional nFromScale As ScaleModeConstants = vbTwips) As Single
     ToContainerSizeX = UserControl.ScaleY(nValue, nFromScale, ContainerScaleMode)
 End Function
 
@@ -1286,7 +1286,7 @@ Private Sub SetWindowRedraw(nHwnd As Long, nRedraw As Boolean, Optional nForce A
     End If
 End Sub
 
-Private Sub RaiseError(ByVal Number As Long, Optional ByVal Source, Optional ByVal Description, Optional ByVal HelpFile, Optional ByVal HelpContext)
+Private Sub RaiseError(ByVal Number As Long, Optional ByVal Source As Variant, Optional ByVal Description As Variant, Optional ByVal HelpFile As Variant, Optional ByVal HelpContext As Variant)
     If InIDE Then
         On Error Resume Next
         Err.Raise Number, Source, Description, HelpFile, HelpContext
